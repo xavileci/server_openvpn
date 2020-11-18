@@ -24,6 +24,9 @@ cp -axp /etc/openvpn/easy-rsa/pki/issued/${nombre}.crt /tmp/${nombre}
 cp -axp /etc/openvpn/easy-rsa/pki/private/${nombre}.key /tmp/${nombre}
 cp -axp /etc/openvpn/keys/ca.crt /tmp/${nombre}
 
+cp -axp /usr/share/doc/openvpn-2.4.9/sample/sample-config-files/client_template.conf /tmp/${nombre}/${nombre}.ovpn &&\
+sed -i "s/%USER%/${nombre}/" /tmp/${nombre}/${nombre}.ovpn
+
 chmod 600 /tmp/${nombre}/*
 cd /tmp
 tar czf /mnt/clientes_vpn/${nombre}.tgz ${nombre}
@@ -34,4 +37,3 @@ fi
 rm -rf /tmp/${nombre}
 
 exit $?
-
